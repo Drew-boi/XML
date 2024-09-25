@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		10B572032CA3B6CB008EAF34 /* employee.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10B572022CA3B6CB008EAF34 /* employee.cpp */; };
+		10B572042CA3B7CD008EAF34 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10B571FD2CA3B698008EAF34 /* main.cpp */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		10B571D32CA3B374008EAF34 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -20,15 +25,19 @@
 
 /* Begin PBXFileReference section */
 		10B571D52CA3B374008EAF34 /* XML */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = XML; sourceTree = BUILT_PRODUCTS_DIR; };
+		10B571F52CA3B698008EAF34 /* employee.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = employee.xml; sourceTree = "<group>"; };
+		10B571F62CA3B698008EAF34 /* employee2.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = employee2.xml; sourceTree = "<group>"; };
+		10B571F72CA3B698008EAF34 /* employee3.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = employee3.xml; sourceTree = "<group>"; };
+		10B571F82CA3B698008EAF34 /* employee4.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = employee4.xml; sourceTree = "<group>"; };
+		10B571F92CA3B698008EAF34 /* employee5.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = employee5.xml; sourceTree = "<group>"; };
+		10B571FA2CA3B698008EAF34 /* employee6.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = employee6.xml; sourceTree = "<group>"; };
+		10B571FB2CA3B698008EAF34 /* employee7.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = employee7.xml; sourceTree = "<group>"; };
+		10B571FC2CA3B698008EAF34 /* employee8.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = employee8.xml; sourceTree = "<group>"; };
+		10B571FD2CA3B698008EAF34 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		10B571FE2CA3B698008EAF34 /* xml.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = xml.pdf; sourceTree = "<group>"; };
+		10B572002CA3B6AF008EAF34 /* employee.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = employee.h; sourceTree = "<group>"; };
+		10B572022CA3B6CB008EAF34 /* employee.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = employee.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		10B571D72CA3B374008EAF34 /* XML */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = XML;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		10B571D22CA3B374008EAF34 /* Frameworks */ = {
@@ -44,7 +53,7 @@
 		10B571CC2CA3B374008EAF34 = {
 			isa = PBXGroup;
 			children = (
-				10B571D72CA3B374008EAF34 /* XML */,
+				10B571FF2CA3B698008EAF34 /* XML */,
 				10B571D62CA3B374008EAF34 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,6 +64,25 @@
 				10B571D52CA3B374008EAF34 /* XML */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		10B571FF2CA3B698008EAF34 /* XML */ = {
+			isa = PBXGroup;
+			children = (
+				10B572002CA3B6AF008EAF34 /* employee.h */,
+				10B572022CA3B6CB008EAF34 /* employee.cpp */,
+				10B571F52CA3B698008EAF34 /* employee.xml */,
+				10B571F62CA3B698008EAF34 /* employee2.xml */,
+				10B571F72CA3B698008EAF34 /* employee3.xml */,
+				10B571F82CA3B698008EAF34 /* employee4.xml */,
+				10B571F92CA3B698008EAF34 /* employee5.xml */,
+				10B571FA2CA3B698008EAF34 /* employee6.xml */,
+				10B571FB2CA3B698008EAF34 /* employee7.xml */,
+				10B571FC2CA3B698008EAF34 /* employee8.xml */,
+				10B571FD2CA3B698008EAF34 /* main.cpp */,
+				10B571FE2CA3B698008EAF34 /* xml.pdf */,
+			);
+			path = XML;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +99,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				10B571D72CA3B374008EAF34 /* XML */,
 			);
 			name = XML;
 			packageProductDependencies = (
@@ -120,6 +145,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10B572042CA3B7CD008EAF34 /* main.cpp in Sources */,
+				10B572032CA3B6CB008EAF34 /* employee.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

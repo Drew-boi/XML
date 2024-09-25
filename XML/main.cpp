@@ -1,14 +1,16 @@
-//
-//  main.cpp
-//  XML
-//
-//  Created by Andrew Buckland on 9/24/24.
-//
-
 #include <iostream>
+#include <fstream>
+#include "employee.h"
+using std::cout;
+using std::ifstream;
+
+char OPENCHEVRON = '<';
+char CLOSECHEVRON = '>';
+char SLASH = '/';
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    ifstream ifs(argv[1]);
+    Employee::fromXML(ifs);
     return 0;
 }
+
