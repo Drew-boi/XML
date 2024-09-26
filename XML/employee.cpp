@@ -24,71 +24,43 @@ void Employee::write(ostream& os) const {
     stobuf(country, emprec.country, sizeof(emprec.country)-1);
     stobuf(phone, emprec.phone, sizeof(emprec.phone)-1);
     emprec.salary = salary;
-    bitset<32> bid(emprec.id);
-    bitset<248> bname;
-    for (int i = 0; i < 31; ++i) {
-        char c = emprec.name[i];
-        for (int j = 7; j >= 0 && c; --j) {
-            if (c & 0x1) {
-                bname.set(8 * i + j);
-            }
-            c >>= 1;
-        }
+    os.write(reinterpret_cast<const char*>(&emprec), sizeof emprec);
+}
+
+void Employee::store(iostream& ios) const { // Overwrite (or append) record in (to) file
+    EmployeeRec emprec;
+    emprec.id = id;
+    stobuf(name, emprec.name, sizeof(emprec.name)-1);
+    stobuf(address, emprec.address, sizeof(emprec.address)-1);
+    stobuf(city, emprec.city, sizeof(emprec.city)-1);
+    stobuf(state, emprec.state, sizeof(emprec.state)-1);
+    stobuf(country, emprec.country, sizeof(emprec.country)-1);
+    stobuf(phone, emprec.phone, sizeof(emprec.phone)-1);
+    emprec.salary = salary;
+    ios.write(reinterpret_cast<const char*>(&emprec), sizeof emprec);
+}
+
+void Employee::toXML(ostream& os) const { // Write XML record for employee
+    os << "<Employee>\n";
+    os << "\t<Name>" << name << "</Name>\n";
+    os << "\t<ID>" << id << "</ID>\n";
+    if (address != "") {
+        os << "\t<Address>" << address << "</Address>\n";
     }
-    bitset<208> baddress;
-    for (int i = 0; i < 26; ++i) {
-        char c = emprec.address[i];
-        for (int j = 7; j >= 0 && c; --j) {
-            if (c & 0x1) {
-                baddress.set(8 * i + j);
-            }
-            c >>= 1;
-        }
+    if (city != "") {
+        os << "\t<City>" << city << "</City>\n";
     }
-    bitset<168> bcity;
-    for (int i = 0; i < 21; ++i) {
-        char c = emprec.city[i];
-        for (int j = 7; j >= 0 && c; --j) {
-            if (c & 0x1) {
-                bcity.set(8 * i + j);
-            }
-            c >>= 1;
-        }
+    if (state != "") {
+        os << "\t<State>" << state << "</State>\n";
     }
-    bitset<168> bstate;
-    for (int i = 0; i < 21; ++i) {
-        char c = emprec.state[i];
-        for (int j = 7; j >= 0 && c; --j) {
-            if (c & 0x1) {
-                bstate.set(8 * i + j);
-            }
-            c >>= 1;
-        }
+    if (country != "") {
+        os << "\t<Country>" << country << "</ID>\n";
     }
-    bitset<168> bcountry;
-    for (int i = 0; i < 21; ++i) {
-        char c = emprec.country[i];
-        for (int j = 7; j >= 0 && c; --j) {
-            if (c & 0x1) {
-                bcountry.set(8 * i + j);
-            }
-            c >>= 1;
-        }
+    if (phone != "") {
+        os << "\t<Phone>" << phone << "</Phone>\n";
     }
-    bitset<168> bphone;
-    for (int i = 0; i < 21; ++i) {
-        char c = emprec.phone[i];
-        for (int j = 7; j >= 0 && c; --j) {
-            if (c & 0x1) {
-                bphone.set(8 * i + j);
-            }
-            c >>= 1;
-        }
+    if (salary != 0.0) {
+        os << "\t<Salary>" << salary << "</Salary>\n";
     }
-    doublelong d; // use a union so you can pass the double bits as a long to bitset
-    d.d = emprec.salary;
-    bitset<64> bsalary(d.u);
-    int value = static_cast<int>(bid.to_ulong());
-    cout << bid << endl;
-    os.write(reinterpret_cast<const char*>(&value), sizeof(value));
+    os << "</Employee>\n\n";
 }

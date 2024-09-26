@@ -32,11 +32,6 @@ class Employee {
         double salary;
     };
     
-    union doublelong {
-      double d;
-      unsigned long long u;
-    };
-    
     static void stobuf(const string& s, char* buf, size_t limit) {
         // Compute the numbers of chars to transfer (can't exceed limit-1)
         size_t nchars{std::min(limit-1,s.size())};

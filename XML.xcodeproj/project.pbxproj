@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		10B572032CA3B6CB008EAF34 /* employee.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10B572022CA3B6CB008EAF34 /* employee.cpp */; };
 		10B572042CA3B7CD008EAF34 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10B571FD2CA3B698008EAF34 /* main.cpp */; };
+		10B572062CA5D312008EAF34 /* coolTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10B572052CA5D312008EAF34 /* coolTest.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +38,7 @@
 		10B571FE2CA3B698008EAF34 /* xml.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = xml.pdf; sourceTree = "<group>"; };
 		10B572002CA3B6AF008EAF34 /* employee.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = employee.h; sourceTree = "<group>"; };
 		10B572022CA3B6CB008EAF34 /* employee.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = employee.cpp; sourceTree = "<group>"; };
+		10B572052CA5D312008EAF34 /* coolTest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = coolTest.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				10B571FC2CA3B698008EAF34 /* employee8.xml */,
 				10B571FD2CA3B698008EAF34 /* main.cpp */,
 				10B571FE2CA3B698008EAF34 /* xml.pdf */,
+				10B572052CA5D312008EAF34 /* coolTest.cpp */,
 			);
 			path = XML;
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				10B572042CA3B7CD008EAF34 /* main.cpp in Sources */,
+				10B572062CA5D312008EAF34 /* coolTest.cpp in Sources */,
 				10B572032CA3B6CB008EAF34 /* employee.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
