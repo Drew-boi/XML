@@ -56,8 +56,47 @@ public:
     void write(ostream& os) const; // Write a fixed-length record to current file position
     void store(iostream& ios) const; // Overwrite (or append) record in (to) file
     void toXML(ostream& os) const; // Write XML record for employee
-    static Employee* read(istream& is); // Read record from current file positon
-    static Employee* retrieve(istream& is, int id); // Search file for record by id
+    static Employee* read(istream& is) { // Read record from current file positon
+        EmployeeRec inbuf;
+        is.read(reinterpret_cast<char*>(&inbuf), sizeof inbuf);
+        if (is) {
+            Employee* emp = new Employee(inbuf.name, inbuf.id, inbuf.address, inbuf.city, inbuf.state, inbuf.country, inbuf.phone, inbuf.salary);
+            return emp;
+        }
+        else {
+            return nullptr;
+        }
+    }
+    
+    static Employee* retrieve(istream& is, int findID) { // Search file for record by id
+        size_t record_size = sizeof(EmployeeRec); // this is the size of an employee record
+        int value = 0;
+        size_t i = 0;
+        size_t currPoint = i * record_size;
+        while (value != findID and is) {
+            currPoint = i * record_size;
+            is.seekg(currPoint, std::ios::beg); // for each 32 bits in memory, you go up 4 on seekg
+            is.read(reinterpret_cast<char*>(&value), sizeof(value));
+            i++;
+        }
+        is.clear();
+        if (value == findID) {
+            is.seekg(currPoint, std::ios::beg);
+            EmployeeRec inbuf;
+            is.read(reinterpret_cast<char*>(&inbuf), sizeof inbuf);
+            if (is) {
+                Employee* emp = new Employee(inbuf.name, inbuf.id, inbuf.address, inbuf.city, inbuf.state, inbuf.country, inbuf.phone, inbuf.salary);
+                return emp;
+            }
+            else {
+                return nullptr;
+            }
+        }
+        else {
+            return nullptr;
+        }
+    }
+        
     static Employee* fromXML(istream& is) { // Read the XML record from a stream
         // Initialize default employee variables
         string tempName = ""; // if default, don't create object

@@ -37,7 +37,25 @@ void Employee::store(iostream& ios) const { // Overwrite (or append) record in (
     stobuf(country, emprec.country, sizeof(emprec.country)-1);
     stobuf(phone, emprec.phone, sizeof(emprec.phone)-1);
     emprec.salary = salary;
-    ios.write(reinterpret_cast<const char*>(&emprec), sizeof emprec);
+    size_t record_size = sizeof(EmployeeRec); // this is the size of an employee record
+    int value = 0;
+    size_t i = 0;
+    size_t currPoint = i * record_size;
+    while (value != id and ios) {
+        currPoint = i * record_size;
+        ios.seekg(currPoint, std::ios::beg); // for each 32 bits in memory, you go up 4 on seekg
+        ios.read(reinterpret_cast<char*>(&value), sizeof(value));
+        i++;
+    }
+    ios.clear();
+    if (value == id) {
+        ios.seekg(currPoint, std::ios::beg);
+        ios.write(reinterpret_cast<const char*>(&emprec), sizeof emprec);
+    }
+    else {
+        ios.seekg(0, std::ios::end);
+        ios.write(reinterpret_cast<const char*>(&emprec), sizeof emprec);
+    }
 }
 
 void Employee::toXML(ostream& os) const { // Write XML record for employee

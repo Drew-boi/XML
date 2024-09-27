@@ -11,7 +11,17 @@ char CLOSECHEVRON = '>';
 char SLASH = '/';
 
 int main(int argc, const char * argv[]) {
-    ifstream ifs(argv[1]);
+    ifstream ifs;
+    try {
+        ifs.open(argv[1]);
+        if (!ifs.is_open()) {
+            throw std::runtime_error("Please enter a valid file.");
+        }
+    }
+    catch (std::runtime_error& err) {
+        cout << err.what() << endl;
+        return 0;
+    }
     std::vector<Employee*> employees;
     Employee* currEmployee;
     try {
@@ -24,23 +34,36 @@ int main(int argc, const char * argv[]) {
     catch (std::runtime_error& err) {
         cout << err.what() << endl;
     }
-    std::fstream file("/Users/andrewbuckland/Desktop/School/Current Semester/CS3370/XML/XML/XML/employee.bin", std::fstream::in | std::fstream::out | std::fstream::trunc | std::ios::binary);
+    ifs.clear();
+    std::fstream file("/Users/andrewbuckland/Desktop/School/Current Semester/CS3370/XML/XML/XML/employee.bin", std::fstream::in | std::fstream::out | std::ios::binary | std::ios::trunc);
     for (Employee* emp : employees) {
-        emp->display(cout);
+        emp->display(cout); // Display each employee record
         cout << endl;
-        emp->write(file);
+        emp->write(file); // Write to the fixed length file
     }
+    employees.clear(); // Empty vector
+    file.seekg(0, std::ios::beg);
+    currEmployee = Employee::read(file);
+    file.clear();
+    while (currEmployee != nullptr) {
+        employees.push_back(currEmployee);
+        currEmployee = Employee::read(file);
+    }
+    file.clear();
     for (Employee* emp : employees) {
         emp->toXML(cout);
     }
-//    size_t record_size = 160; // this is the size of an employee record
-//    file.seekg(2 * record_size, std::ios::beg); // for each 32 bits in memory, you go up 4 on seekg
-//    int value;
-//    file.read(reinterpret_cast<char*>(&value), sizeof(value));
-//
-//    // Output the bits of the integer
-//    std::bitset<32> bid(value);
-//    cout << bid.to_string() << endl;
-    
+    Employee* newEmployee = Employee::retrieve(file, 12345);
+    newEmployee->salary = 15000.00;
+    newEmployee->store(file);
+    file.clear();
+    Employee* checkEmployee = Employee::retrieve(file, 12345);
+    file.clear();
+    cout << "Salary: "<< checkEmployee->salary << endl << endl;
+    Employee myEmployee("Big Joey", 1234567, "1010 Hello Street", "Atlantis", "Bermuda Triangle", "Ocean", "801-888-1234", 1000.00);
+    myEmployee.store(file);
+    file.clear();
+    Employee* finalEmployee = Employee::retrieve(file, 1234567);
+    finalEmployee->display(cout);
     return 0;
 }
