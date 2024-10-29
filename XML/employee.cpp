@@ -3,7 +3,7 @@
 Employee::Employee(string name, int id, string address, string city, string state, string country, string phone, double salary) : name(name), id(id), address(address), city(city), state(state), country(country), phone(phone), salary(salary)
 {};
 
-void Employee::display(ostream& os) const {
+void Employee::display(ostream& os) const { // Write a readable Employee representation to a stream
     cout << "id: " << id << endl;
     cout << "name: " << name << endl;
     cout << "address: " << address << endl;
@@ -14,8 +14,8 @@ void Employee::display(ostream& os) const {
     cout << "salary: " << salary << endl;
 }
 
-void Employee::write(ostream& os) const {
-    EmployeeRec emprec;
+void Employee::write(ostream& os) const { // Write a fixed-length record to current file position
+    EmployeeRec emprec; // emprecs are fixed length structures
     emprec.id = id;
     stobuf(name, emprec.name, sizeof(emprec.name)-1);
     stobuf(address, emprec.address, sizeof(emprec.address)-1);
@@ -24,7 +24,7 @@ void Employee::write(ostream& os) const {
     stobuf(country, emprec.country, sizeof(emprec.country)-1);
     stobuf(phone, emprec.phone, sizeof(emprec.phone)-1);
     emprec.salary = salary;
-    os.write(reinterpret_cast<const char*>(&emprec), sizeof emprec);
+    os.write(reinterpret_cast<const char*>(&emprec), sizeof emprec); // put populated structure in the file
 }
 
 void Employee::store(iostream& ios) const { // Overwrite (or append) record in (to) file
@@ -41,18 +41,18 @@ void Employee::store(iostream& ios) const { // Overwrite (or append) record in (
     int value = 0;
     size_t i = 0;
     size_t currPoint = i * record_size;
-    while (value != id and ios) {
+    while (value != id and ios) { // search the file for an existing employee with this id
         currPoint = i * record_size;
         ios.seekg(currPoint, std::ios::beg); // for each 32 bits in memory, you go up 4 on seekg
         ios.read(reinterpret_cast<char*>(&value), sizeof(value));
         i++;
     }
-    ios.clear();
-    if (value == id) {
+    ios.clear(); // clear for incase we reached the end of the file
+    if (value == id) { // employee found, overwite that employee
         ios.seekg(currPoint, std::ios::beg);
         ios.write(reinterpret_cast<const char*>(&emprec), sizeof emprec);
     }
-    else {
+    else { // employee not found, write a new employee
         ios.seekg(0, std::ios::end);
         ios.write(reinterpret_cast<const char*>(&emprec), sizeof emprec);
     }
